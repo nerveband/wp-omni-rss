@@ -1,17 +1,19 @@
 === WP Omni RSS ===
-Contributors: nerveband
+Contributors: ashrafali
 Tags: rss, feed, content syndication, custom post types
 Requires at least: 5.0
 Tested up to: 6.4
 Stable tag: 1.0.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: MIT
+License URI: https://opensource.org/licenses/MIT
 
 Syndicate all your content - pages, posts, and custom types - in one unified RSS feed.
 
 == Description ==
 
 WP Omni RSS enhances WordPress's RSS functionality by including all content types in your site's feeds. Whether you're using standard posts, pages, or custom post types, everything can be included in a single, unified feed.
+
+This plugin was inspired by Adam Newbold's essay ["Everything is a Web Page"](https://notes.neatnik.net/2025/01/everything-is-a-web-page), which argues that the distinction between static pages and blog posts is merely a mental model, and that all web content can be treated as syndication-worthy pages.
 
 Features:
 
@@ -21,6 +23,8 @@ Features:
 * Revision tracking in feeds
 * Configurable feed formatting
 * Support for all public post types
+
+Created by [Ashraf Ali](https://ashrafali.net)
 
 == Installation ==
 
@@ -55,4 +59,9 @@ Yes, each post has a meta box where you can control whether it appears in the fe
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release 
+Initial release
+
+== Credits ==
+
+* Inspired by Adam Newbold's essay ["Everything is a Web Page"](https://notes.neatnik.net/2025/01/everything-is-a-web-page)
+* Created by [Ashraf Ali](https://ashrafali.net) 

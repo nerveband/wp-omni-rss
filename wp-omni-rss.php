@@ -2,12 +2,14 @@
 /**
  * Plugin Name: WP Omni RSS
  * Plugin URI: https://wordpress.org/plugins/wp-omni-rss
- * Description: Syndicate all your content - pages, posts, and custom types - in one unified RSS feed
+ * Description: Syndicate all your content - pages, posts, and custom types - in one unified RSS feed. Inspired by Adam Newbold's essay "Everything is a Web Page".
  * Version: 1.0.0
- * Author: Nerveband
+ * Author: Ashraf Ali
+ * Author URI: https://ashrafali.net
  * Text Domain: wp-omni-rss
  * Domain Path: /languages
- * License: GPL v2 or later
+ * License: MIT
+ * License URI: https://opensource.org/licenses/MIT
  */
 
 // If this file is called directly, abort.
