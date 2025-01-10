@@ -1,133 +1,171 @@
 /* WP Omni RSS Admin Styles */
 
-.wp-omni-rss-preview {
+/* Feed URL */
+.feed-url-container {
     background: #fff;
-    border: 1px solid #ccd0d4;
-    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 15px;
     margin: 20px 0;
-    padding: 20px;
 }
 
-.wp-omni-rss-preview h2 {
+.feed-url-container h2 {
     margin-top: 0;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+}
+
+#feed-url {
+    display: inline-block;
+    background: #f6f7f7;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+#feed-url:hover {
+    background: #f0f0f1;
+}
+
+/* Preview Container */
+.wp-omni-rss-preview {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px 0;
 }
 
 .preview-container {
-    display: flex;
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.preview-column {
-    flex: 1;
-    min-width: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
 .preview-column h3 {
     margin-top: 0;
     padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-    color: #1d2327;
+    border-bottom: 1px solid #dcdcde;
 }
 
-.preview-content {
-    background: #f8f9fa;
-    border: 1px solid #e5e7eb;
+/* Preview Items */
+.preview-item {
+    background: #fff;
+    border: 1px solid #dcdcde;
     border-radius: 4px;
     padding: 15px;
-}
-
-.preview-item {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 15px;
 }
 
 .preview-item:last-child {
     margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
 }
 
 .preview-item h4 {
-    margin: 0 0 10px;
+    margin: 0 0 10px 0;
     color: #2271b1;
 }
 
+/* Meta Information */
 .preview-meta {
+    border-left: 4px solid #2271b1;
+    padding-left: 12px;
     margin: 10px 0;
-    color: #50575e;
 }
 
+.preview-meta em {
+    display: block;
+    color: #2271b1;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.preview-meta .additional-meta {
+    color: #50575e;
+    font-size: 12px;
+    line-height: 1.4;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px solid #dcdcde;
+}
+
+/* Preview Excerpt */
 .preview-excerpt {
-    color: #3c434a;
+    background: #f6f7f7;
+    padding: 10px;
+    border-radius: 4px;
     margin-top: 10px;
 }
 
-/* Settings Form Styles */
-.description.example {
-    font-style: italic;
-    color: #646970;
-    margin-top: 5px;
-}
-
-p.submit {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-/* Enhanced Features List */
-.ul-disc {
-    list-style: disc;
-    margin-left: 20px;
-    color: #50575e;
-}
-
-.ul-disc li {
-    margin-bottom: 5px;
-}
-
-/* Post Meta Box Styles */
-.wp-omni-rss-post-settings {
-    margin: -6px -12px -12px;
-}
-
-.wp-omni-rss-post-settings p {
-    margin: 0 0 12px;
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-}
-
-.wp-omni-rss-post-settings p:last-child {
-    margin-bottom: 0;
-    border-bottom: none;
-}
-
-.wp-omni-rss-post-settings label {
+/* Settings Form */
+.form-table fieldset label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-.wp-omni-rss-post-settings textarea {
     margin: 5px 0;
 }
 
-.wp-omni-rss-post-settings .description {
-    margin: 5px 0 0;
-    color: #646970;
+.form-table fieldset input[type="radio"] {
+    margin-top: 1px;
+}
+
+/* Prefix Type Selection */
+.prefix-types-selection {
+    background: #f6f7f7;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin-top: 5px;
+}
+
+.prefix-types-selection label {
+    color: #3c434a;
+}
+
+.prefix-types-selection input[type="checkbox"]:disabled + span {
+    color: #a7aaad;
+}
+
+/* Submit Section */
+.submit {
+    padding: 15px 0;
+    margin-top: 20px;
+    border-top: 1px solid #dcdcde;
+}
+
+.submit .button {
+    margin-right: 10px;
 }
 
 /* Responsive Design */
 @media screen and (max-width: 782px) {
     .preview-container {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
     
-    .preview-column {
-        margin-bottom: 20px;
+    .preview-column + .preview-column {
+        margin-top: 20px;
     }
+} 
+
+.wp-omni-rss-header {
+    background: #1d2327;
+    padding: 20px;
+    margin: 20px 20px 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.wp-omni-rss-header img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.wp-omni-rss-container {
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+    margin: 20px 20px 20px 0;
+    border-radius: 4px;
 } 

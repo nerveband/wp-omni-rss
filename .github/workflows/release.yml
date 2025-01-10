@@ -1,57 +1,37 @@
 name: Release WordPress Plugin
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - "*"
 
 jobs:
   build:
-    name: Build and Package Plugin
+    name: Build and Create Release
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
-        extensions: mbstring, xml
-        coverage: none
-        tools: composer:v2
-    
-    - name: Get release version
-      id: get_version
-      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-    
-    - name: Update version in files
-      run: |
-        sed -i "s/Version: .*/Version: $VERSION/" wp-omni-rss.php
-        sed -i "s/Stable tag: .*/Stable tag: $VERSION/" README.md
-    
-    - name: Install dependencies
-      run: composer install --no-dev --optimize-autoloader
-    
-    - name: Create plugin archive
-      run: |
-        mkdir wp-omni-rss
-        rsync -av --exclude={'.git*','composer.*','*.md','tests','phpunit.xml'} . wp-omni-rss/
-        zip -r wp-omni-rss.zip wp-omni-rss
-    
-    - name: Upload release asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./wp-omni-rss.zip
-        asset_name: wp-omni-rss.zip
-        asset_content_type: application/zip
-    
-    - name: Deploy to WordPress.org
-      if: "!contains(github.ref, '-alpha') && !contains(github.ref, '-beta')"
-      uses: 10up/action-wordpress-plugin-deploy@stable
-      env:
-        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-        SLUG: wp-omni-rss 
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get tag
+        id: get_tag
+        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Build plugin
+        run: |
+          mkdir wp-omni-rss
+          cp -r admin includes languages *.php readme.txt LICENSE wp-omni-rss/
+          zip -r wp-omni-rss-${{ env.TAG }}.zip wp-omni-rss
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: wp-omni-rss-${{ env.TAG }}.zip
+          name: WP Omni RSS ${{ env.TAG }}
+          body_path: CHANGELOG.md
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 

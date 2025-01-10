@@ -1,95 +1,109 @@
 # WP Omni RSS
 
-> ⚠️ **Alpha Release**: This plugin is currently in alpha stage. Use in production at your own risk.
+![WP Omni RSS - Syndicate all your WordPress content](admin/images/banner.png)
 
-A WordPress plugin that syndicates all your content - pages, posts, and custom types - in one unified RSS feed.
+Transform your WordPress RSS feed into a powerful content distribution channel. Get more control over what content appears in your feed and how it's presented.
 
-## Description
+## 🤔 What is WP Omni RSS?
 
-WP Omni RSS enhances WordPress's RSS functionality by including all content types in your site's feeds. Whether you're using standard posts, pages, or custom post types, everything can be included in a single, unified feed.
+WP Omni RSS enhances your WordPress RSS feed by adding features that standard WordPress RSS doesn't provide:
+- Include any content type (posts, pages, products, etc.)
+- Track and display content changes
+- Add custom meta information
+- Control excerpt length
+- Add content type prefixes to titles
 
-This plugin was inspired by Adam Newbold's essay ["Everything is a Web Page"](https://notes.neatnik.net/2025/01/everything-is-a-web-page), which argues that the distinction between static pages and blog posts is merely a mental model, and that all web content can be treated as syndication-worthy pages.
+Perfect for:
+- Content publishers who want better RSS feeds
+- Developers integrating WordPress content into other platforms
+- Teams using RSS for content syndication
 
-## Features
+## 🚀 Quick Start
 
-* Include any content type in your RSS feed
-* Track and share content changes with your subscribers
-* Add change descriptions to explain updates
-* Include custom meta information with your content
-* Visual preview of enhanced feed format
-* Configurable feed formatting
-* Support for all public post types
+1. Install the plugin through WordPress admin or upload to `/wp-content/plugins/`
+2. Activate the plugin
+3. Go to Settings > WP Omni RSS
+4. Choose which content types to include in your feed
+5. Visit `yourdomain.com/feed` to see your enhanced RSS feed
 
-## Installation
+## 📚 Core Concepts
 
-1. Upload the plugin files to the `/wp-content/plugins/wp-omni-rss` directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Use the Settings->WP Omni RSS screen to configure the plugin
+WP Omni RSS works by extending WordPress's built-in RSS functionality in three key ways:
+1. **Content Selection**: Choose exactly which content types appear in your feed
+2. **Change Tracking**: Add notes about what changed in each update
+3. **Meta Information**: Include additional context with each item
 
-## Configuration
+## 💡 Common Use Cases
 
-### Content Types
-You can select which content types to include in the feed from the plugin settings page. By default, posts and pages are included.
+### Adding Content Types to Your Feed
+1. Go to Settings > WP Omni RSS
+2. Check the boxes for content types you want to include
+3. Save changes
 
-### Enhanced Features
-When enabled, you can:
-1. **Track Changes**: Add descriptions when you update content
-   - Example: "Updated pricing information for 2024"
-   - Example: "Added new team member bio"
-   - Example: "Fixed broken links in documentation"
+### Tracking Content Changes
+1. Edit any post or page
+2. Find the "RSS Change Tracking" box
+3. Add notes about what changed
+4. Update your content
 
-2. **Custom Meta**: Include additional information with your content
-   - Author notes
-   - References
-   - Related content links
-   - Additional context
+### Adding Custom Meta Information
+1. Edit your content
+2. Locate the "Additional Meta Information" field
+3. Add your custom notes or references
+4. Update to see it in your feed
 
-The enhanced features help your subscribers understand what changed and access additional content metadata.
+## 📖 Settings Reference
 
-### Feed Preview
-The settings page includes a live preview showing how your feed will look with and without the enhancements:
-- Default WordPress feed
-- Enhanced Omni RSS feed with content types, change tracking, and meta information
+### General Settings
+- **Content Types**: Choose which types appear in feed
+- **Prefix Type**: How content types are shown in titles
+- **Excerpt Length**: Number of words (0 for full content)
+- **Change Tracking**: Enable/disable change notes
 
-## Requirements
+### Post Meta Fields
+- **Change Description**: What changed in this update
+- **Additional Meta**: Extra information to include
 
-- WordPress 5.0 or higher
-- PHP 7.4 or higher
+## 🔧 Developer Guide
 
-## Development
+### Filters
+```php
+// Modify feed content
+add_filter('wp_omni_rss_content', 'your_function');
 
-### Building from Source
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/wp-omni-rss.git
-cd wp-omni-rss
-
-# Install dependencies (if any)
-composer install
+// Adjust feed settings
+add_filter('wp_omni_rss_settings', 'your_function');
 ```
 
-### Running Tests
+### Actions
+```php
+// Before feed generation
+do_action('wp_omni_rss_before_feed');
 
-```bash
-# Run PHP tests
-composer test
+// After feed generation
+do_action('wp_omni_rss_after_feed');
 ```
 
-## Changelog
+## ❓ Troubleshooting
 
-### 1.0.0-alpha
-* Initial alpha release
-* Basic feed enhancement functionality
-* Settings page with visual preview
-* Change tracking and post meta features
-* Reset to defaults functionality
+### Feed Not Updating?
+1. Clear your WordPress cache
+2. Verify your feed URL is correct
+3. Check if selected content types have published items
 
-## Credits
+### Missing Content Types?
+1. Ensure content types are public
+2. Verify they're selected in settings
+3. Check user permissions
 
-* Inspired by Adam Newbold's essay ["Everything is a Web Page"](https://notes.neatnik.net/2025/01/everything-is-a-web-page)
-* Created by [Ashraf Ali](https://ashrafali.net)
+### Need Help?
+- Open an issue on GitHub
+- Check our documentation
+- Contact support
 
-## License
+## 📄 License
 
-MIT License - see [LICENSE](LICENSE) for details. 
+MIT License
+
+---
+Made with ❤️ by [Ashraf Ali](https://ashrafali.net)
