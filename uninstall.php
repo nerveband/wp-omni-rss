@@ -7,12 +7,13 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 // Delete plugin options
 delete_option('wp_omni_rss_settings');
 
-// Get all post types
-$post_types = get_post_types(array('public' => true));
-
-// Delete post meta for all posts
-global $wpdb;
-$wpdb->query("DELETE FROM {$wpdb->postmeta} WHERE meta_key IN ('_wp_omni_rss_enabled', '_wp_omni_rss_description')");
+// Get plugin settings to check if post meta was used
+$settings = get_option('wp_omni_rss_settings', array());
+if (isset($settings['use_post_meta']) && $settings['use_post_meta']) {
+    // Delete post meta only if it was enabled
+    global $wpdb;
+    $wpdb->query("DELETE FROM {$wpdb->postmeta} WHERE meta_key = '_wp_omni_rss_description'");
+}
 
 // Clear any cached data
 wp_cache_flush(); 

@@ -64,8 +64,7 @@ class WP_Omni_RSS {
         // Set default options
         $default_options = array(
             'included_types' => array('post', 'page'),
-            'show_revisions' => true,
-            'change_format' => '[{type}] {title} - {change_note}',
+            'use_post_meta' => false,
             'excerpt_length' => 150
         );
         add_option('wp_omni_rss_settings', $default_options);

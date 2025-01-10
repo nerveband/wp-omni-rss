@@ -47,19 +47,19 @@ class WP_Omni_RSS_Feed {
         $post_type_obj = get_post_type_object($post->post_type);
         $type_label = $post_type_obj ? $post_type_obj->labels->singular_name : $post->post_type;
 
-        $change_note = get_post_meta($post_id, '_wp_omni_rss_description', true);
-        if (!empty($change_note)) {
-            $options = get_option('wp_omni_rss_settings', array());
-            $format = isset($options['change_format']) ? $options['change_format'] : '[{type}] {title} - {change_note}';
-            
-            $header = str_replace(
-                array('{type}', '{title}', '{change_note}'),
-                array($type_label, $post->post_title, $change_note),
-                $format
-            );
-            
-            $content = '<p><strong>' . esc_html($header) . '</strong></p>' . $content;
+        $options = get_option('wp_omni_rss_settings', array());
+        $use_post_meta = isset($options['use_post_meta']) ? $options['use_post_meta'] : false;
+
+        if ($use_post_meta) {
+            $change_note = get_post_meta($post_id, '_wp_omni_rss_description', true);
+            if (!empty($change_note)) {
+                $content = '<p><em>' . esc_html($change_note) . '</em></p>' . $content;
+            }
         }
+
+        // Add post type indicator
+        $header = sprintf('[%s] %s', esc_html($type_label), esc_html($post->post_title));
+        $content = '<p><strong>' . $header . '</strong></p>' . $content;
 
         return $content;
     }
@@ -73,9 +73,14 @@ class WP_Omni_RSS_Feed {
     public function add_change_context($excerpt) {
         global $post;
         
-        $change_note = get_post_meta($post->ID, '_wp_omni_rss_description', true);
-        if (!empty($change_note)) {
-            $excerpt = '<p><em>' . esc_html($change_note) . '</em></p>' . $excerpt;
+        $options = get_option('wp_omni_rss_settings', array());
+        $use_post_meta = isset($options['use_post_meta']) ? $options['use_post_meta'] : false;
+
+        if ($use_post_meta) {
+            $change_note = get_post_meta($post->ID, '_wp_omni_rss_description', true);
+            if (!empty($change_note)) {
+                $excerpt = '<p><em>' . esc_html($change_note) . '</em></p>' . $excerpt;
+            }
         }
         
         return $excerpt;
