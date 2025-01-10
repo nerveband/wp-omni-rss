@@ -13,8 +13,9 @@ This plugin was inspired by Adam Newbold's essay ["Everything is a Web Page"](ht
 ## Features
 
 * Include any content type in your RSS feed
-* Per-post control over feed inclusion (optional)
-* Custom change descriptions for feed items
+* Track and share content changes with your subscribers
+* Add change descriptions to explain updates (e.g., "Updated pricing information", "Added new team member")
+* Visual preview of enhanced feed format
 * Configurable feed formatting
 * Support for all public post types
 
@@ -27,10 +28,20 @@ This plugin was inspired by Adam Newbold's essay ["Everything is a Web Page"](ht
 ## Configuration
 
 ### Content Types
-You can select which content types to include in the feed from the plugin settings page.
+You can select which content types to include in the feed from the plugin settings page. By default, posts and pages are included.
 
-### Post Meta (Optional)
-When enabled, you can add custom descriptions to posts and control feed inclusion per post.
+### Change Tracking (Optional)
+When enabled, you can add a description each time you update content. This helps your subscribers understand what changed and why. For example:
+- "Updated pricing information for 2024"
+- "Added new team member bio"
+- "Fixed broken links in documentation"
+
+The change descriptions will appear in your RSS feed along with the content, making it easy for subscribers to track important updates.
+
+### Feed Preview
+The settings page includes a live preview showing how your feed will look with and without the enhancements:
+- Default WordPress feed
+- Enhanced Omni RSS feed with content types and change tracking
 
 ## Requirements
 
@@ -62,8 +73,9 @@ composer test
 ### 1.0.0-alpha
 * Initial alpha release
 * Basic feed enhancement functionality
-* Settings page implementation
-* Optional post meta features
+* Settings page with visual preview
+* Optional change tracking features
+* Reset to defaults functionality
 
 ## Credits
 
