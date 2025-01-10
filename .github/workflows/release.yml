@@ -1,51 +1,57 @@
 name: Release WordPress Plugin
 
 on:
-  push:
-    tags:
-      - "v*"
+  release:
+    types: [published]
 
 jobs:
   build:
+    name: Build and Package Plugin
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '7.4'
-          
-      - name: Get tag name
-        id: get_tag
-        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-        
-      - name: Build plugin
-        run: |
-          mkdir wp-omni-rss
-          cp -r admin includes languages *.php LICENSE README.md wp-omni-rss/
-          zip -r wp-omni-rss.zip wp-omni-rss
-          
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            See [CHANGELOG.md](CHANGELOG.md) for details.
-          draft: false
-          prerelease: ${{ contains(github.ref, '-alpha') || contains(github.ref, '-beta') || contains(github.ref, '-rc') }}
-          
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./wp-omni-rss.zip
-          asset_name: wp-omni-rss.zip
-          asset_content_type: application/zip 
+    - uses: actions/checkout@v3
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        extensions: mbstring, xml
+        coverage: none
+        tools: composer:v2
+    
+    - name: Get release version
+      id: get_version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+    
+    - name: Update version in files
+      run: |
+        sed -i "s/Version: .*/Version: $VERSION/" wp-omni-rss.php
+        sed -i "s/Stable tag: .*/Stable tag: $VERSION/" README.md
+    
+    - name: Install dependencies
+      run: composer install --no-dev --optimize-autoloader
+    
+    - name: Create plugin archive
+      run: |
+        mkdir wp-omni-rss
+        rsync -av --exclude={'.git*','composer.*','*.md','tests','phpunit.xml'} . wp-omni-rss/
+        zip -r wp-omni-rss.zip wp-omni-rss
+    
+    - name: Upload release asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./wp-omni-rss.zip
+        asset_name: wp-omni-rss.zip
+        asset_content_type: application/zip
+    
+    - name: Deploy to WordPress.org
+      if: "!contains(github.ref, '-alpha') && !contains(github.ref, '-beta')"
+      uses: 10up/action-wordpress-plugin-deploy@stable
+      env:
+        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+        SLUG: wp-omni-rss 

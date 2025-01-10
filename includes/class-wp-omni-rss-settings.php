@@ -67,7 +67,7 @@ class WP_Omni_RSS_Settings {
 
         add_settings_field(
             'use_post_meta',
-            __('Enable Change Tracking', 'wp-omni-rss'),
+            __('Enable Enhanced Features', 'wp-omni-rss'),
             array($this, 'render_use_post_meta_field'),
             'wp-omni-rss',
             'wp_omni_rss_main'
@@ -191,13 +191,18 @@ class WP_Omni_RSS_Settings {
         <label>
             <input type="checkbox" name="wp_omni_rss_settings[use_post_meta]" 
                    value="1" <?php checked($use_post_meta); ?>>
-            <?php esc_html_e('Enable change tracking in RSS feed', 'wp-omni-rss'); ?>
+            <?php esc_html_e('Enable change tracking and post meta in RSS feed', 'wp-omni-rss'); ?>
         </label>
         <p class="description">
-            <?php esc_html_e('When enabled, you can add a description of your changes each time you update content. This helps your subscribers understand what changed and why.', 'wp-omni-rss'); ?>
+            <?php esc_html_e('When enabled, you can:', 'wp-omni-rss'); ?>
         </p>
+        <ul class="ul-disc">
+            <li><?php esc_html_e('Add change descriptions each time you update content (e.g., "Updated pricing", "Added team member")', 'wp-omni-rss'); ?></li>
+            <li><?php esc_html_e('Include custom meta information with your posts', 'wp-omni-rss'); ?></li>
+            <li><?php esc_html_e('Control how individual posts appear in the feed', 'wp-omni-rss'); ?></li>
+        </ul>
         <p class="description example">
-            <?php esc_html_e('Example: "Updated pricing information" or "Added new team member bio"', 'wp-omni-rss'); ?>
+            <?php esc_html_e('These features help your subscribers understand what changed and access additional content metadata.', 'wp-omni-rss'); ?>
         </p>
         <?php
     }
@@ -241,14 +246,25 @@ class WP_Omni_RSS_Settings {
     public function render_post_settings($post) {
         wp_nonce_field('wp_omni_rss_post_settings', 'wp_omni_rss_post_nonce');
         $description = get_post_meta($post->ID, '_wp_omni_rss_description', true);
+        $custom_meta = get_post_meta($post->ID, '_wp_omni_rss_custom_meta', true);
         ?>
-        <p>
-            <label for="wp_omni_rss_description"><?php esc_html_e('What changed?', 'wp-omni-rss'); ?></label><br>
-            <textarea id="wp_omni_rss_description" name="wp_omni_rss_description" rows="3" style="width: 100%;"><?php echo esc_textarea($description); ?></textarea>
-            <p class="description">
-                <?php esc_html_e('Briefly describe what you changed. This will be included in the RSS feed to help subscribers understand the update.', 'wp-omni-rss'); ?>
+        <div class="wp-omni-rss-post-settings">
+            <p>
+                <label for="wp_omni_rss_description"><?php esc_html_e('What changed?', 'wp-omni-rss'); ?></label><br>
+                <textarea id="wp_omni_rss_description" name="wp_omni_rss_description" rows="3" style="width: 100%;"><?php echo esc_textarea($description); ?></textarea>
+                <p class="description">
+                    <?php esc_html_e('Briefly describe what you changed. This will be included in the RSS feed to help subscribers understand the update.', 'wp-omni-rss'); ?>
+                </p>
             </p>
-        </p>
+            
+            <p>
+                <label for="wp_omni_rss_custom_meta"><?php esc_html_e('Additional Meta Information', 'wp-omni-rss'); ?></label><br>
+                <textarea id="wp_omni_rss_custom_meta" name="wp_omni_rss_custom_meta" rows="3" style="width: 100%;"><?php echo esc_textarea($custom_meta); ?></textarea>
+                <p class="description">
+                    <?php esc_html_e('Optional metadata to include with this content (e.g., author notes, references, related content).', 'wp-omni-rss'); ?>
+                </p>
+            </p>
+        </div>
         <?php
     }
 
@@ -273,6 +289,10 @@ class WP_Omni_RSS_Settings {
 
         if (isset($_POST['wp_omni_rss_description'])) {
             update_post_meta($post_id, '_wp_omni_rss_description', sanitize_textarea_field($_POST['wp_omni_rss_description']));
+        }
+
+        if (isset($_POST['wp_omni_rss_custom_meta'])) {
+            update_post_meta($post_id, '_wp_omni_rss_custom_meta', sanitize_textarea_field($_POST['wp_omni_rss_custom_meta']));
         }
     }
 } 

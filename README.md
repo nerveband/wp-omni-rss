@@ -14,7 +14,8 @@ This plugin was inspired by Adam Newbold's essay ["Everything is a Web Page"](ht
 
 * Include any content type in your RSS feed
 * Track and share content changes with your subscribers
-* Add change descriptions to explain updates (e.g., "Updated pricing information", "Added new team member")
+* Add change descriptions to explain updates
+* Include custom meta information with your content
 * Visual preview of enhanced feed format
 * Configurable feed formatting
 * Support for all public post types
@@ -30,18 +31,25 @@ This plugin was inspired by Adam Newbold's essay ["Everything is a Web Page"](ht
 ### Content Types
 You can select which content types to include in the feed from the plugin settings page. By default, posts and pages are included.
 
-### Change Tracking (Optional)
-When enabled, you can add a description each time you update content. This helps your subscribers understand what changed and why. For example:
-- "Updated pricing information for 2024"
-- "Added new team member bio"
-- "Fixed broken links in documentation"
+### Enhanced Features
+When enabled, you can:
+1. **Track Changes**: Add descriptions when you update content
+   - Example: "Updated pricing information for 2024"
+   - Example: "Added new team member bio"
+   - Example: "Fixed broken links in documentation"
 
-The change descriptions will appear in your RSS feed along with the content, making it easy for subscribers to track important updates.
+2. **Custom Meta**: Include additional information with your content
+   - Author notes
+   - References
+   - Related content links
+   - Additional context
+
+The enhanced features help your subscribers understand what changed and access additional content metadata.
 
 ### Feed Preview
 The settings page includes a live preview showing how your feed will look with and without the enhancements:
 - Default WordPress feed
-- Enhanced Omni RSS feed with content types and change tracking
+- Enhanced Omni RSS feed with content types, change tracking, and meta information
 
 ## Requirements
 
@@ -74,7 +82,7 @@ composer test
 * Initial alpha release
 * Basic feed enhancement functionality
 * Settings page with visual preview
-* Optional change tracking features
+* Change tracking and post meta features
 * Reset to defaults functionality
 
 ## Credits

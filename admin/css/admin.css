@@ -79,6 +79,48 @@ p.submit {
     align-items: center;
 }
 
+/* Enhanced Features List */
+.ul-disc {
+    list-style: disc;
+    margin-left: 20px;
+    color: #50575e;
+}
+
+.ul-disc li {
+    margin-bottom: 5px;
+}
+
+/* Post Meta Box Styles */
+.wp-omni-rss-post-settings {
+    margin: -6px -12px -12px;
+}
+
+.wp-omni-rss-post-settings p {
+    margin: 0 0 12px;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.wp-omni-rss-post-settings p:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.wp-omni-rss-post-settings label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.wp-omni-rss-post-settings textarea {
+    margin: 5px 0;
+}
+
+.wp-omni-rss-post-settings .description {
+    margin: 5px 0 0;
+    color: #646970;
+}
+
 /* Responsive Design */
 @media screen and (max-width: 782px) {
     .preview-container {
