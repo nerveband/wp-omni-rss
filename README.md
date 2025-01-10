@@ -18,6 +18,10 @@ Perfect for:
 - Developers integrating WordPress content into other platforms
 - Teams using RSS for content syndication
 
+## 🚀 Inspiration
+
+This plugin was inspired by Adam Newbold's essay ["Everything is a Web Page"](https://notes.neatnik.net/2025/01/everything-is-a-web-page), which argues that the distinction between static pages and blog posts is merely a mental model. All web content can be treated as syndication-worthy pages. WP Omni RSS brings this vision to WordPress by allowing you to include any content type in your RSS feed.
+
 ## 🚀 Quick Start
 
 1. Install the plugin through WordPress admin or upload to `/wp-content/plugins/`

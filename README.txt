@@ -6,13 +6,13 @@ Tested up to: 6.4
 Stable tag: 1.0.0
 Requires PHP: 7.4
 License: MIT
-License URI: https://opensource.org/license/mit
+License URI: https://github.com/nerveband/wp-omni-rss/blob/main/LICENSE
 
 Transform your WordPress RSS feed into a powerful content distribution channel with support for all content types, change tracking, and meta information.
 
 == Description ==
 
-= What is WP Omni RSS? =
+= What is WP Omni RSS? (Appraise) =
 
 WP Omni RSS enhances your WordPress RSS feed by adding features that standard WordPress RSS doesn't provide:
 
@@ -27,15 +27,17 @@ Perfect for:
 * Developers integrating WordPress content into other platforms
 * Teams using RSS for content syndication
 
-= Core Concepts =
+= Inspiration =
+
+This plugin was inspired by Adam Newbold's essay ["Everything is a Web Page"](https://notes.neatnik.net/2025/01/everything-is-a-web-page), which argues that the distinction between static pages and blog posts is merely a mental model. All web content can be treated as syndication-worthy pages. WP Omni RSS brings this vision to WordPress by allowing you to include any content type in your RSS feed.
+
+= Core Concepts (Understand) =
 
 WP Omni RSS works by extending WordPress's built-in RSS functionality in three key ways:
 
 1. **Content Selection**: Choose exactly which content types appear in your feed
 2. **Change Tracking**: Add notes about what changed in each update
 3. **Meta Information**: Include additional context with each item
-
-This plugin was inspired by Adam Newbold's essay ["Everything is a Web Page"](https://notes.neatnik.net/2025/01/everything-is-a-web-page), which argues that all web content can be treated as syndication-worthy pages.
 
 == Installation ==
 
