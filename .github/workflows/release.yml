@@ -20,8 +20,18 @@ jobs:
 
       - name: Build plugin
         run: |
-          mkdir wp-omni-rss
-          cp -r admin includes languages *.php readme.txt LICENSE wp-omni-rss/
+          mkdir -p wp-omni-rss
+          # Copy required files
+          cp -r admin includes wp-omni-rss/
+          cp *.php wp-omni-rss/ 2>/dev/null || true
+          
+          # Copy optional files/directories if they exist
+          [ -d "languages" ] && cp -r languages wp-omni-rss/
+          [ -f "readme.txt" ] && cp readme.txt wp-omni-rss/
+          [ -f "LICENSE" ] && cp LICENSE wp-omni-rss/
+          [ -f "README.md" ] && cp README.md wp-omni-rss/
+          
+          # Create zip
           zip -r wp-omni-rss-${{ env.TAG }}.zip wp-omni-rss
 
       - name: Create Release
